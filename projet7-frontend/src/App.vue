@@ -19,9 +19,8 @@ export default {
 }
 
 body {
-  background-image: linear-gradient(62deg, #ffd7d7 00%, #fd2a01 210%);
+  background-image: linear-gradient(180deg, #ffd7d7 00%, #fd2a01 210%);
   display: flex;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding:32px;
