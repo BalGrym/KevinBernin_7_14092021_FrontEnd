@@ -1,5 +1,5 @@
 <template>
-  <form class="container d-flex justify-content-center align-items-center card card-login">
+  <form  class="container d-flex justify-content-center align-items-center card card-login">
     <img src="../assets/icon-above-font.png" alt="logo Groupomania" class="w-25 h-25">
     <!-- Titre Connexion -->
     <h1 class="card-title" v-if="mode == 'login' ">Connexion </h1>
@@ -13,30 +13,30 @@
 
     <!-- Email -->
     <div class="my-3 w-100">
-      <input v-model="email" type="email" class="form-control" id="email" placeholder="Adresse Mail">
+      <input v-model="email" type="email" class="form-control" id="email" placeholder="Adresse Mail" required>
     </div>
 
     <!-- Prénom et Nom /// Utile uniquement en CreateAccount -->
     <div class="row g-3 w-100" v-if="mode == 'create'">
       <div class="col ps-0">
-        <input v-model="prenom" type="text" class="form-control" placeholder="Prénom" aria-label="Prénom">
+        <input v-model="prenom" type="text" class="form-control" placeholder="Prénom" aria-label="Prénom" required>
       </div>
       <div class="col pe-0">
-        <input v-model="nom" type="text" class="form-control" placeholder="Nom" aria-label="Nom">
+        <input v-model="nom" type="text" class="form-control" placeholder="Nom" aria-label="Nom" required>
       </div>
     </div>  
 
     <!-- Mot de Passe -->
     <div class="form w-100">
-      <input v-model="password" type="password" id="password" class="form-control my-3" placeholder="Mot de passe">
+      <input v-model="password" type="password" id="password" class="form-control my-3" placeholder="Mot de passe" required>
     </div>
 
     <div v-if="mode == 'login' && errorStatus == 'loginError'" class="w-100 mb-3">
       Adresse mail et/ou mot de passe invalide !
     </div>
 
-    <button @click="login()" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
-    <button @click="createAccount()" class="btn button-submit mb-3 w-25" v-else>S'incrire</button>
+    <button @click="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
+    <button @click="createAccount()" :disabled="!email.length || !prenom.length || !nom.length || !password.length" class="btn button-submit mb-3 w-25" v-else>S'incrire</button>
 
   </form>
 </template>
@@ -70,8 +70,8 @@ export default {
         lastName: this.nom,
         password: this.password,
       })
-      .then(function (response) {
-        console.log(response);
+      .then(() => {
+        this.login();
       })
       .catch( function (error) {
         console.log(error);
@@ -84,12 +84,15 @@ export default {
         password: this.password,
       })
       .then(function (response) {
-        console.log(response.data);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('role', response.data.role);
+        window.location.href = "http://localhost:8080/?#/accueil"
       })
       .catch(()=>{
         this.errorStatus = 'loginError';
       })
-    }
+    },
 
   }
 }

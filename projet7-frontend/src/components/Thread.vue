@@ -14,8 +14,8 @@
                     </ul>
                 </div>
             </div>
-            <h5 class="card-title">{{ thread.title }}</h5>
-            <p class="card-text thread-text">{{ thread.content }} </p>
+            <h5 class="card-title">{{ thread.articleTitle }}</h5>
+            <p class="card-text thread-text">{{ thread.articleContent }} </p>
             <div v-on:click="toggleComment" class="d-flex flex-row btn btn-comment">
                <i class="fas fa-comment"></i>
                <p class="comment-text">Commentaires</p> 
@@ -23,13 +23,14 @@
             
         </div>
     </div>
-    <comment v-bind:key="index" v-for="(thread,index) in threads" v-bind:toggleComment="toggleComment" v-bind:revele="revele"></comment>
+    <comment v-bind:toggleComment="toggleComment" v-bind:revele="revele"></comment>
 </div>
 </template>
 
 <script>
 
 import Comment from './Comment.vue'
+import axios from 'axios'
 
 export default {
   name: 'Thread',
@@ -39,20 +40,32 @@ export default {
   
   data() {
     return{
-        threads:[
-            {prenom: 'arthur', nom: 'dubois' ,title: 'titre1', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non exercitationem quisquam, architecto, nihil dicta labore libero esse animi at excepturi eaque. Illum sed sunt aliquid incidunt earum quae veritatis reprehenderit, perferendis quasi voluptates excepturi delectus cupiditate facere officia magnam nam commodi non ducimus optio aspernatur magni? Magni maiores corporis ipsam?'},
-            {prenom: 'arno', nom: 'dupont' ,title: 'titre2', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non exercitationem quisquam, architecto, nihil dicta labore libero esse animi at excepturi eaque. Illum sed sunt aliquid incidunt earum quae veritatis reprehenderit, perferendis quasi voluptates excepturi delectus cupiditate facere officia magnam nam commodi non ducimus optio aspernatur magni? Magni maiores corporis ipsam?'},
-            {prenom: 'kevin', nom: 'rimbaud' ,title: 'titre3', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non exercitationem quisquam, architecto, nihil dicta labore libero esse animi at excepturi eaque. Illum sed sunt aliquid incidunt earum quae veritatis reprehenderit, perferendis quasi voluptates excepturi delectus cupiditate facere officia magnam nam commodi non ducimus optio aspernatur magni? Magni maiores corporis ipsam?'},
-            {prenom: 'léna', nom: 'impe' ,title: 'titre4', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non exercitationem quisquam, architecto, nihil dicta labore libero esse animi at excepturi eaque. Illum sed sunt aliquid incidunt earum quae veritatis reprehenderit, perferendis quasi voluptates excepturi delectus cupiditate facere officia magnam nam commodi non ducimus optio aspernatur magni? Magni maiores corporis ipsam?'}
-        ],
+        threads: [],
         revele: false,
     }
   },
   methods: {
-      toggleComment: function() {
-          this.revele = !this.revele
-      }
+    toggleComment: function() {
+        this.revele = !this.revele
+    },
+    getAllthreads: function() {
+        axios.get('http://localhost:3000/api/threads/', {
+            headers: {
+                Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+                }
+        })
+        .then((response) => {
+            this.threads = response.data
+            console.log(this.threads);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
   },
+  created(){
+      this.getAllthreads()
+  }
 }
 </script>
 
