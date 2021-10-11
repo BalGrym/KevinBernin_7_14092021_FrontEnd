@@ -16,6 +16,7 @@ export default {
 <style>
 #app {
   max-width: 100%;
+  /* width: 100%; */
 }
 
 body {

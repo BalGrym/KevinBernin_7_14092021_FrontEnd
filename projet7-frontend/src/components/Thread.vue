@@ -3,7 +3,7 @@
     <div v-bind:key="index" v-for="(thread,index) in threads" class="card uniqueThread">
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
-                <h4 class="card-title">{{ thread.prenom }} {{ thread.nom }}</h4>
+                <h4 class="card-title">{{ thread.User.firstName }} {{ thread.User.lastName }}</h4>
                 <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn color-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     
@@ -24,6 +24,7 @@
         </div>
     </div>
     <comment v-bind:toggleComment="toggleComment" v-bind:revele="revele"></comment>
+    <button class="btn-createThread color-primary btn" @click="gotToCreateThread()">Publiez !</button>
 </div>
 </template>
 
@@ -61,6 +62,9 @@ export default {
         .catch(function (error) {
             console.log(error);
         })
+    },
+    gotToCreateThread: function() {
+        window.location.href = "http://localhost:8080/accueil/create"
     }
   },
   created(){
@@ -69,7 +73,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 .threads{
@@ -108,10 +111,16 @@ export default {
     margin-bottom: 0;
 }
 
-
-
 .fa-comment{
     line-height: inherit;
+}
+
+.btn-createThread{
+    position: fixed;
+    bottom: 20px;
+
+    font-size: 20px;
+    
 }
 
 </style>

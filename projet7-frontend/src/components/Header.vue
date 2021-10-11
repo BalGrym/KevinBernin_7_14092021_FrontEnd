@@ -2,7 +2,7 @@
 <div class="header">
     <div class="d-flex flex-row justify-content-between w-50">
         <img src="../assets/icon-left-font.png" alt="groupomania logo et nom" class="image-header my-2">
-        <button class="btn button-color my-2">Deconnexion</button>
+        <button @click="disconnect()" class="btn button-color my-2">Deconnexion</button>
     </div>
 </div>
  
@@ -11,6 +11,17 @@
 <script>
 export default {
   name: 'Accueil',
+  data(){
+      return {
+
+      }
+  },
+  methods: {
+      disconnect: function() {
+          localStorage.removeItem('token');
+          window.location.href = "http://localhost:8080/?#/"
+      }
+  }
 }
 </script>
 

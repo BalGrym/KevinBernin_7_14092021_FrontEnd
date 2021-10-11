@@ -85,9 +85,7 @@ export default {
       })
       .then(function (response) {
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.userId);
-        localStorage.setItem('role', response.data.role);
-        window.location.href = "http://localhost:8080/?#/accueil"
+        window.location.href = "http://localhost:8080/accueil"
       })
       .catch(()=>{
         this.errorStatus = 'loginError';
