@@ -30,7 +30,6 @@ export default {
             axios.post('http://localhost:3000/api/threads', {
                 articleTitle: this.title,
                 articleContent: this.content,
-                userId: 1
             }, {
                 headers: {
                     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')

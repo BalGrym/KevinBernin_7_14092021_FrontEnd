@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
                 <h4 class="card-title">{{ thread.User.firstName }} {{ thread.User.lastName }}</h4>
-                <div class="btn-group" role="group">
+                <div v-if="thread.User.id == userId" class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn color-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     
                     </button>
@@ -43,6 +43,8 @@ export default {
     return{
         threads: [],
         revele: false,
+        role: localStorage.getItem('role'),
+        userId: localStorage.getItem('userId')
     }
   },
   methods: {
@@ -67,18 +69,13 @@ export default {
         window.location.href = "http://localhost:8080/accueil/create"
     },
     deleteThread: function(e) {
-        console.log(e);
-        axios.delete('http://localhost:3000/api/threads/:id', {
-            params: {
-                id: e
-            }
-        }, {
+        axios.delete(`http://localhost:3000/api/threads/${e}`, {
             headers: {
                 Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
             }
         })
         .then(() => {
-            console.log('thread supprimé')
+            location.reload();
         })
         .catch(function (error) {
             console.log(error);
