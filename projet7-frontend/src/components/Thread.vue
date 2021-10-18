@@ -9,8 +9,8 @@
                     
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <li><a class="dropdown-item" href="#">Supprimer</a></li>
-                    <li><a class="dropdown-item" href="#">Modifier</a></li>
+                        <li><a @click="deleteThread()" class="dropdown-item" href="#">Supprimer</a></li>
+                        <li><a class="dropdown-item" href="#">Modifier</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,6 +65,9 @@ export default {
     },
     gotToCreateThread: function() {
         window.location.href = "http://localhost:8080/accueil/create"
+    },
+    deleteThread: function () {
+        console.log(this.threads)
     }
   },
   created(){
