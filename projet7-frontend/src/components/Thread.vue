@@ -1,6 +1,6 @@
 <template>
 <div class="threads">
-    <div v-bind:key="index" v-for="(thread,index) in threads" class="card uniqueThread">
+    <div v-bind:key="thread.id" v-for="thread in threads" class="card uniqueThread">
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
                 <h4 class="card-title">{{ thread.User.firstName }} {{ thread.User.lastName }}</h4>
@@ -9,7 +9,7 @@
                     
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a @click="deleteThread()" class="dropdown-item" href="#">Supprimer</a></li>
+                        <li><a @click="deleteThread(thread.id)" class="dropdown-item" href="#">Supprimer</a></li>
                         <li><a class="dropdown-item" href="#">Modifier</a></li>
                     </ul>
                 </div>
@@ -66,8 +66,23 @@ export default {
     gotToCreateThread: function() {
         window.location.href = "http://localhost:8080/accueil/create"
     },
-    deleteThread: function () {
-        console.log(this.threads)
+    deleteThread: function(e) {
+        console.log(e);
+        axios.delete('http://localhost:3000/api/threads/:id', {
+            params: {
+                id: e
+            }
+        }, {
+            headers: {
+                Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+            }
+        })
+        .then(() => {
+            console.log('thread supprimé')
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     }
   },
   created(){
