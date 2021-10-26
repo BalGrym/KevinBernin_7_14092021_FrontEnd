@@ -1,5 +1,5 @@
 <template>
-    <div class="bloc-comment" v-if="revele">
+    <div class="bloc-comment" v-if="reveleComment">
 
         <div v-on:click="toggleComment" class="overlay"></div>
 
@@ -14,7 +14,7 @@
 <script>
 export default {
     name: 'Comment',
-    props: ['revele', 'toggleComment']
+    props: ['reveleComment', 'toggleComment']
 }
 </script>
 

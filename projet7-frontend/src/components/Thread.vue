@@ -4,13 +4,13 @@
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
                 <h4 class="card-title">{{ thread.User.firstName }} {{ thread.User.lastName }}</h4>
-                <div v-if="thread.User.id == userId" class="btn-group" role="group">
+                <div v-if="thread.User.id == userId || role == 0" class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn color-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <li><a @click="deleteThread(thread.id)" class="dropdown-item" href="#">Supprimer</a></li>
-                        <li><a class="dropdown-item" href="#">Modifier</a></li>
+                        <li><a @click="getThreadId(thread.id)" v-on:click="toggleModifyThread" class="dropdown-item" href="#">Modifier</a></li>
                     </ul>
                 </div>
             </div>
@@ -23,7 +23,8 @@
             
         </div>
     </div>
-    <comment v-bind:toggleComment="toggleComment" v-bind:revele="revele"></comment>
+    <comment v-bind:toggleComment="toggleComment" v-bind:reveleComment="reveleComment"></comment>
+    <modifyThread :threadId="threadId" v-bind:toggleModifyThread="toggleModifyThread" v-bind:reveleModifyThread="reveleModifyThread"></modifyThread>
     <button class="btn-createThread color-primary btn" @click="gotToCreateThread()">Publiez !</button>
 </div>
 </template>
@@ -31,25 +32,35 @@
 <script>
 
 import Comment from './Comment.vue'
+import modifyThread from './ModifyThread.vue'
 import axios from 'axios'
 
 export default {
   name: 'Thread',
   components: {
-      'comment': Comment
+      'comment': Comment,
+      'modifyThread': modifyThread
   },
   
   data() {
     return{
         threads: [],
-        revele: false,
+        threadId: '',
+        reveleComment: false,
+        reveleModifyThread: false,
         role: localStorage.getItem('role'),
         userId: localStorage.getItem('userId')
     }
   },
   methods: {
     toggleComment: function() {
-        this.revele = !this.revele
+        this.reveleComment = !this.reveleComment
+    },
+    toggleModifyThread: function() {
+        this.reveleModifyThread = !this.reveleModifyThread
+    },
+    getThreadId: function(id) {
+        this.threadId = id;
     },
     getAllthreads: function() {
         axios.get('http://localhost:3000/api/threads/', {
