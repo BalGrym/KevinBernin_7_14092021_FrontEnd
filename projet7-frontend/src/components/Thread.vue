@@ -16,14 +16,14 @@
             </div>
             <h5 class="card-title">{{ thread.articleTitle }}</h5>
             <p class="card-text thread-text">{{ thread.articleContent }} </p>
-            <div v-on:click="toggleComment" class="d-flex flex-row btn btn-comment">
+            <div  v-on:click="toggleComment" @click="getThreadId(thread.id); $refs.comment.getComments()" class="d-flex flex-row btn btn-comment">
                <i class="fas fa-comment"></i>
                <p class="comment-text">Commentaires</p> 
             </div>
             
         </div>
     </div>
-    <comment v-bind:toggleComment="toggleComment" v-bind:reveleComment="reveleComment"></comment>
+    <comment ref="comment" :threadId="threadId" v-bind:toggleComment="toggleComment" v-bind:reveleComment="reveleComment"></comment>
     <modifyThread :threadId="threadId" v-bind:toggleModifyThread="toggleModifyThread" v-bind:reveleModifyThread="reveleModifyThread"></modifyThread>
     <button class="btn-createThread color-primary btn" @click="gotToCreateThread()">Publiez !</button>
 </div>
@@ -61,6 +61,7 @@ export default {
     },
     getThreadId: function(id) {
         this.threadId = id;
+        console.log(this.threadId);
     },
     getAllthreads: function() {
         axios.get('http://localhost:3000/api/threads/', {
@@ -146,7 +147,6 @@ export default {
     bottom: 20px;
 
     font-size: 20px;
-    
 }
 
 </style>

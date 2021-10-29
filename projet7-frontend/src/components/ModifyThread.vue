@@ -7,14 +7,15 @@
             <div v-on:click="toggleModifyThread" class="btn-modale btn btn-danger">X</div>
             <form>
                 <div class="m-3">
+                    <p></p>
                     <input v-model="title" type="text" class="form-control" placeholder="Titre de l'article" aria-label="Titre de l'article">
                 </div>
 
                 <div class="m-3">
-                    <textarea v-model="content" name="content" class="form-control" id="content" cols="40" rows="10" placeholder="Rédigez le contenu de votre article"></textarea>
+                    <textarea v-model="content" name="content" class="form-control" id="content" cols="40" rows="10" placeholder="Modifiez le contenu de votre article"></textarea>
                 </div>
 
-                <button @click.prevent="modifyThread(threadId)" class="btn btn-primary m-3">Modifer</button>
+                <button @click.prevent="modifyThread(threadId)" class="btn btn-primary color-primary m-3">Modifer</button>
             </form>
         </div>
 
@@ -55,7 +56,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.color-primary{
+    color: #fff;
+    background-color: #fd2a01;
+    border-color: #fd2a01;
+}
 
 .bloc-modifyThread {
     position: fixed;
@@ -82,7 +89,7 @@ export default {
 .modale{
     background: #f1f1f1;
     color: #333;
-    padding: 50px;
+    padding: 40px 40px 10px 10px;
     position: fixed;
 }
 
