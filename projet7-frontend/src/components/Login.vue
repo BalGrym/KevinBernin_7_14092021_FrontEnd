@@ -54,6 +54,8 @@ export default {
       nom: '',
       password: '',
       errorStatus: '',
+      role: '',
+      userId: '',
     }
   },
   methods: {
@@ -101,10 +103,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.divLogin{
-  background-color: white;
-}
-
  .card__action {
     color:#2196F3;
     text-decoration: underline;
@@ -121,8 +119,13 @@ export default {
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
   }
 
+  .button-submit:hover{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
+  }
+
 .card-login{
   border-radius: 10px;
+  width: 45%;
 }
 
 </style>

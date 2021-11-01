@@ -23,11 +23,11 @@ export default {
 
 .threads{
   margin-top: 30px;
-  width: 90%;
+  width: 70%;
 }
-
+/* 
 .container{
   width: 100%!important;
-}
+} */
 
 </style>

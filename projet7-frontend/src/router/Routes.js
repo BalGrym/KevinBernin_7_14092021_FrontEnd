@@ -4,6 +4,6 @@ import CreateThread from '../components/CreateThread'
 
 export default [
     {path: '/', component: Login},
-    {path: '/accueil', component: Accueil},
+    {path: '/accueil', component: Accueil, name: 'accueil'},
     {path: '/accueil/create', component: CreateThread},
 ]

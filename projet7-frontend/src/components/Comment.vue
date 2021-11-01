@@ -4,15 +4,17 @@
         <div v-on:click="toggleComment" class="overlay"></div>
 
         <div class="modale card">
-            <div v-on:click="toggleComment" class="btn-modale btn btn-danger">X</div>
-            <h2>Commentaires</h2>
-            <div v-for="comment in comments" v-bind:key="comment.id">
-                <p>{{ comment.comment }}</p>
+            <button v-on:click="toggleComment" class="btn-modale btn btn-danger">X</button>
+            <h2 class="mb-4">Commentaires</h2>
+            <div v-for="comment in comments" v-bind:key="comment.id" class="border-bottom mb-3">
+                <p class="fw-bold mb-0">{{ comment.User.firstName }} {{ comment.User.lastName }}</p>
+                <p class="mb-0">{{ comment.comment }}</p>
             </div>
+            <p class="border-bottom" v-if="comments.length == 0">Il n'y a pas de commentaires pour le moment. Soyez le premier à commenter !</p>
             <form>
 
                 <div>
-                    <textarea v-model="comment" name="comment" class="form-control"  cols="10" rows="5" placeholder="Ecrivez votre commentaire !" aria-label="Ecrivez votre commentaire !"></textarea>
+                    <textarea v-model="comment" name="comment" class="form-control"  placeholder="Ecrivez votre commentaire !" aria-label="Ecrivez votre commentaire !"></textarea>
                 </div>
 
                 <button @click.prevent="createComment()" class="btn color-primary mt-2">Publier</button>
@@ -35,8 +37,8 @@ export default {
         }
     },
     methods: {
-        getComments: function() {
-            axios.get(`http://localhost:3000/api/threads/${this.threadId}/comment`, {
+        getComments: function(e) {
+            axios.get(`http://localhost:3000/api/threads/${e}/comment`, {
                 headers: {
                     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
                     }
@@ -58,11 +60,11 @@ export default {
                 }
             })
             .then(() => {
-                console.log('commentCreated');
-                this.getComments()
+                this.comment = '';
+                this.getComments(this.threadId);
             })
-            .catch((e) =>{
-                console.log(e);
+            .catch((err) =>{
+                console.log(err);
             })
         }
     }
@@ -102,8 +104,9 @@ export default {
 .modale{
     background: #f1f1f1;
     color: #333;
-    padding: 40px 40px 20px 20px;
+    padding: 10px 40px 20px 20px;
     position: fixed;
+    width: 35%;
 }
 
 .btn-modale{

@@ -53,4 +53,8 @@ export default {
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
 }
 
+.button-color:hover{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
+}
+
 </style>

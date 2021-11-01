@@ -1,14 +1,12 @@
 <template>
     <div class="bloc-modifyThread" v-if="reveleModifyThread">
-
         <div v-on:click="toggleModifyThread" class="overlay"></div>
-
         <div class="modale card">
             <div v-on:click="toggleModifyThread" class="btn-modale btn btn-danger">X</div>
             <form>
                 <div class="m-3">
                     <p></p>
-                    <input v-model="title" type="text" class="form-control" placeholder="Titre de l'article" aria-label="Titre de l'article">
+                    <textarea v-model="title"  type="text" class="form-control" aria-label="Titre de l'article"></textarea>
                 </div>
 
                 <div class="m-3">
@@ -18,7 +16,6 @@
                 <button @click.prevent="modifyThread(threadId)" class="btn btn-primary color-primary m-3">Modifer</button>
             </form>
         </div>
-
     </div>
 </template>
 
@@ -28,7 +25,7 @@ import axios from 'axios'
 
 export default {
     name: 'Comment',
-    props: ['reveleModifyThread', 'toggleModifyThread', 'threadId'],
+    props: ['reveleModifyThread', 'toggleModifyThread', 'threadId', 'threadContent', 'threadTitle'],
      data() {
         return {
             title: '',
@@ -48,8 +45,8 @@ export default {
             .then(() => {
                 location.reload();
             })
-            .catch((e) =>{
-                console.log(e);
+            .catch((err) =>{
+                console.log(err);
             })
         }
     }
@@ -62,6 +59,10 @@ export default {
     color: #fff;
     background-color: #fd2a01;
     border-color: #fd2a01;
+}
+
+.color-primary:focus{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
 }
 
 .bloc-modifyThread {

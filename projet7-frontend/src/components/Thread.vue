@@ -16,10 +16,10 @@
             </div>
             <h5 class="card-title">{{ thread.articleTitle }}</h5>
             <p class="card-text thread-text">{{ thread.articleContent }} </p>
-            <div  v-on:click="toggleComment" @click="getThreadId(thread.id); $refs.comment.getComments()" class="d-flex flex-row btn btn-comment">
+            <button  v-on:click="toggleComment" @click="getThreadId(thread.id); $refs.comment.getComments(thread.id)" class="d-flex flex-row btn btn-comment color-primary">
                <i class="fas fa-comment"></i>
                <p class="comment-text">Commentaires</p> 
-            </div>
+            </button>
             
         </div>
     </div>
@@ -45,11 +45,13 @@ export default {
   data() {
     return{
         threads: [],
+        // threadContent: '',
+        // threadTitle: '',
         threadId: '',
         reveleComment: false,
         reveleModifyThread: false,
         role: localStorage.getItem('role'),
-        userId: localStorage.getItem('userId')
+        userId: localStorage.getItem('userId'),
     }
   },
   methods: {
@@ -59,6 +61,13 @@ export default {
     toggleModifyThread: function() {
         this.reveleModifyThread = !this.reveleModifyThread
     },
+    // threadForModify: function(thread){
+    //     this.threadContent = thread.articleContent;
+    //     this.threadTitle = thread.articleTitle;
+    //     console.log(this.threadTitle);
+    //     console.log(this.threadContent);
+    // }
+    // ,
     getThreadId: function(id) {
         this.threadId = id;
         console.log(this.threadId);
@@ -120,6 +129,10 @@ export default {
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
 }
 
+.color-primary:hover{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;    
+}
+
 .thread-text{
     padding-bottom: 1em;
     box-shadow:0px 1px 0px #fd2a01;
@@ -129,8 +142,8 @@ export default {
     width: min-content;
     height: min-content;
     color: #fff;
-    background-color: #fd2a01;
-    border-color: #fd2a01;
+    /* background-color: #fd2a01;
+    border-color: #fd2a01; */
 }
 
 .comment-text{
