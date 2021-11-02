@@ -35,8 +35,8 @@
       Adresse mail et/ou mot de passe invalide !
     </div>
 
-    <button @click="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
-    <button @click="createAccount()" :disabled="!email.length || !prenom.length || !nom.length || !password.length" class="btn button-submit mb-3 w-25" v-else>S'incrire</button>
+    <button @click.prevent="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
+    <button @click.prevent="createAccount()" :disabled="!email.length || !prenom.length || !nom.length || !password.length" class="btn button-submit mb-3 w-25" v-else>S'incrire</button>
 
   </form>
 </template>
@@ -78,7 +78,6 @@ export default {
       .catch( function (error) {
         console.log(error);
       })
-      console.log(this.email, this.nom, this.prenom, this.password);
     },
     login: function() {
       axios.post('http://localhost:3000/api/auth/login', {
@@ -91,8 +90,9 @@ export default {
         localStorage.setItem('role', response.data.role);
         window.location.href = "http://localhost:8080/accueil"
       })
-      .catch(()=>{
+      .catch((e)=>{
         this.errorStatus = 'loginError';
+        console.log(e);
       })
     },
 

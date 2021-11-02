@@ -18,8 +18,8 @@ export default {
   },
   methods: {
       disconnect: function() {
-          localStorage.removeItem('token');
-          window.location.href = "http://localhost:8080/?#/"
+          localStorage.clear();
+          this.$router.push({ name: 'login' })
       }
   }
 }

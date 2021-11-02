@@ -79,6 +79,16 @@ export default {
     border-color: #fd2a01;
 }
 
+.color-primary:focus{
+    color: #fff;
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
+}
+
+.color-primary:hover{
+    color: #fff;
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;    
+}
+
 .bloc-comment {
     position: fixed;
     top: 0;

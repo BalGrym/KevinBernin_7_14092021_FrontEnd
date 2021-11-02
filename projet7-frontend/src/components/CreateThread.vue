@@ -39,7 +39,7 @@ export default {
                 }
             })
             .then(() => {
-                window.location.href = "http://localhost:8080/accueil"
+                this.$router.push({ name: 'accueil' })
             })
             .catch((e) =>{
                 console.log(e);
@@ -67,4 +67,13 @@ export default {
     background-color: #fd2a01;
     border-color: #fd2a01;
 }
+
+.color-primary:focus{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
+}
+
+.color-primary:hover{
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;    
+}
+
 </style>
