@@ -10,7 +10,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <li><a @click="deleteThread(thread.id)" class="dropdown-item" href="#">Supprimer</a></li>
-                        <li><a @click="getThreadId(thread.id)" v-on:click="toggleModifyThread" class="dropdown-item" href="#">Modifier</a></li>
+                        <li><a @click="getThreadId(thread.id); $refs.modify.getOneThread(thread.id) " v-on:click="toggleModifyThread" class="dropdown-item" href="#">Modifier</a></li>
                     </ul>
                 </div>
             </div>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <comment ref="comment" :threadId="threadId" v-bind:toggleComment="toggleComment" v-bind:reveleComment="reveleComment"></comment>
-    <modifyThread :threadId="threadId" v-bind:toggleModifyThread="toggleModifyThread" v-bind:reveleModifyThread="reveleModifyThread"></modifyThread>
+    <modifyThread ref="modify" :threadId="threadId" v-bind:toggleModifyThread="toggleModifyThread" v-bind:reveleModifyThread="reveleModifyThread"></modifyThread>
     <button class="btn-createThread color-primary btn" @click="gotToCreateThread()">Publiez !</button>
 </div>
 </template>
@@ -113,6 +113,7 @@ export default {
 
 .threads{
     margin-top: 5%;
+    margin-bottom: 30px;
 }
 
 .uniqueThread{
@@ -158,7 +159,7 @@ export default {
 .btn-createThread{
     position: fixed;
     bottom: 20px;
-
+    box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
     font-size: 20px;
 }
 

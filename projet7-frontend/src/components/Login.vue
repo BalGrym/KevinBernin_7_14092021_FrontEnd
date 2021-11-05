@@ -80,7 +80,7 @@ export default {
       })
     },
     login: function() {
-      axios.post('http://localhost:3000/api/auth/login', {
+      axios.post(`http://localhost:3000/api/auth/login`, {
         email: this.email,
         password: this.password,
       })
@@ -89,6 +89,7 @@ export default {
         localStorage.setItem('userId', response.data.userId);
         localStorage.setItem('role', response.data.role);
         window.location.href = "http://localhost:8080/accueil"
+        // this.$router.push({ name: 'accueil' })
       })
       .catch((e)=>{
         this.errorStatus = 'loginError';

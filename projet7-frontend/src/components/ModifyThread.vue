@@ -5,11 +5,12 @@
             <div v-on:click="toggleModifyThread" class="btn-modale btn btn-danger">X</div>
             <form>
                 <div class="m-3">
-                    <p></p>
+                    <p class="mb-1">Modifiez le titre :</p>
                     <textarea v-model="title"  type="text" class="form-control" aria-label="Titre de l'article"></textarea>
                 </div>
 
                 <div class="m-3">
+                    <p class="mb-1">Modifiez le contenu de l'article :</p>
                     <textarea v-model="content" name="content" class="form-control" id="content" cols="40" rows="10" placeholder="Modifiez le contenu de votre article"></textarea>
                 </div>
 
@@ -29,7 +30,7 @@ export default {
      data() {
         return {
             title: '',
-            content: ''
+            content: '',
         }
     },
     methods: {
@@ -47,6 +48,20 @@ export default {
             })
             .catch((err) =>{
                 console.log(err);
+            })
+        },
+        getOneThread: function(e) {
+            axios.get(`http://localhost:3000/api/threads/${e}`, {
+            headers: {
+                Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+                }
+            })
+            .then((response) => {
+                this.title = response.data.articleTitle;
+                this.content = response.data.articleContent;
+            })
+            .catch(function (error) {
+                console.log(error);
             })
         }
     }

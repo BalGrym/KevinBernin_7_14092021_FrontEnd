@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         getComments: function(e) {
-            axios.get(`http://localhost:3000/api/threads/${e}/comment`, {
+            axios.get(`http://localhost:3000/api/thread/${e}/comment`, {
                 headers: {
                     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
                     }
@@ -52,7 +52,7 @@ export default {
             })
         },
         createComment: function(){
-            axios.post(`http://localhost:3000/api/threads/${this.threadId}/comment`, {
+            axios.post(`http://localhost:3000/api/thread/${this.threadId}/comment`, {
                 comment: this.comment
             }, {
                 headers: {
