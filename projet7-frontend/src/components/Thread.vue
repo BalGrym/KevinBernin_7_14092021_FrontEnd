@@ -45,8 +45,6 @@ export default {
   data() {
     return{
         threads: [],
-        // threadContent: '',
-        // threadTitle: '',
         threadId: '',
         reveleComment: false,
         reveleModifyThread: false,
@@ -61,13 +59,6 @@ export default {
     toggleModifyThread: function() {
         this.reveleModifyThread = !this.reveleModifyThread
     },
-    // threadForModify: function(thread){
-    //     this.threadContent = thread.articleContent;
-    //     this.threadTitle = thread.articleTitle;
-    //     console.log(this.threadTitle);
-    //     console.log(this.threadContent);
-    // }
-    // ,
     getThreadId: function(id) {
         this.threadId = id;
         console.log(this.threadId);

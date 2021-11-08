@@ -31,8 +31,12 @@
       <input v-model="password" type="password" id="password" class="form-control my-3" placeholder="Mot de passe" required>
     </div>
 
-    <div v-if="mode == 'login' && errorStatus == 'loginError'" class="w-100 mb-3">
+    <div v-if="mode == 'login' && status == 'error_login'" class="w-100 mb-3">
       Adresse mail et/ou mot de passe invalide !
+    </div>
+
+    <div v-if="mode == 'create' && status == 'error_created'" class="w-100 mb-3">
+      Vérifiez l'adresse mail ou le mot de passe !
     </div>
 
     <button @click.prevent="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
@@ -42,7 +46,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState } from 'vuex'
 
 export default {
   name: 'Login',
@@ -53,10 +57,12 @@ export default {
       prenom: '',
       nom: '',
       password: '',
-      errorStatus: '',
       role: '',
       userId: '',
     }
+  },
+  computed: {
+    ...mapState(['status'])
   },
   methods: {
     goToCreateAccount: function() {
@@ -66,37 +72,31 @@ export default {
       this.mode = 'login';
     },
     createAccount: function() {
-      axios.post('http://localhost:3000/api/auth/signup', {
+      const self = this;
+      this.$store.dispatch('createAccount', {
         email: this.email,
         firstName: this.prenom,
         lastName: this.nom,
         password: this.password,
-      })
-      .then(() => {
-        this.login();
-      })
-      .catch( function (error) {
+      }).then(function (response) {
+        console.log(response);
+        self.login();
+      }).catch(function (error) {
         console.log(error);
       })
     },
     login: function() {
-      axios.post(`http://localhost:3000/api/auth/login`, {
+      const self = this;
+      this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
-      })
-      .then(function (response) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.userId);
-        localStorage.setItem('role', response.data.role);
-        window.location.href = "http://localhost:8080/accueil"
-        // this.$router.push({ name: 'accueil' })
-      })
-      .catch((e)=>{
-        this.errorStatus = 'loginError';
-        console.log(e);
+      }).then(function (response) {
+        console.log(response);
+        self.$router.push({ name: 'accueil' })
+      }).catch(function (error) {
+        console.log(error);
       })
     },
-
   }
 }
 </script>

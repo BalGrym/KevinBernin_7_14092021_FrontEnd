@@ -1,6 +1,8 @@
 <template>
     <div class="d-flex justify-content-center align-items-center card createThread">
-        <form>
+         <header-top></header-top>
+        <form class="w-100">
+            <p class="m-3">Créez l'article que vous voulez publier !</p>
             <div class="m-3">
                 <input v-model="title" type="text" class="form-control" placeholder="Titre de l'article" aria-label="Titre de l'article">
             </div>
@@ -19,9 +21,13 @@
 
 <script>
 import axios from 'axios';
+import Header from './Header.vue'
 
 export default {
     name: 'CreateThread',
+    components: {
+      'header-top': Header,
+  },
     data() {
         return {
             title: '',
@@ -57,7 +63,7 @@ export default {
 <style scoped>
 
 .createThread{
-    max-width: 20%;
+    max-width: 30%;
     margin-right: auto;
     margin-left: auto;
 }
