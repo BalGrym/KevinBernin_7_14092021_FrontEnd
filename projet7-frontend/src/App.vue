@@ -27,4 +27,11 @@ body {
   min-height: 100vh;
   padding:32px;
 }
+
+@media (max-width: 576px) {
+  body {
+    padding: 32px 10px 32px 10px;
+  }
+
+ }
 </style>

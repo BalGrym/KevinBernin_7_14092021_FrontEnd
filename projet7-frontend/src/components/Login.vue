@@ -129,7 +129,7 @@ export default {
   /* width: 45%; */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .card-login{
     width: 50%;
   }
@@ -139,7 +139,4 @@ export default {
   }
 
  }
-
-
-
 </style>
