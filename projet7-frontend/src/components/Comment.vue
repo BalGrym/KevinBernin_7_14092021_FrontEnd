@@ -116,7 +116,6 @@ export default {
     color: #333;
     padding: 10px 40px 20px 20px;
     position: fixed;
-    width: 35%;
 }
 
 .btn-modale{
@@ -124,6 +123,13 @@ export default {
     top: 10px;
     right: 10px;
 }
+
+@media (min-width: 768px) {
+  .modale{
+    width: 35%!important;
+  }
+
+ }
 
 
 </style>

@@ -21,10 +21,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.threads{
-  margin-top: 30px;
-  width: 70%;
-}
+
 /* 
 .container{
   width: 100%!important;

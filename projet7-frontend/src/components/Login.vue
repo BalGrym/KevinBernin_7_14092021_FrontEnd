@@ -1,6 +1,6 @@
 <template>
-  <form  class="container d-flex justify-content-center align-items-center card card-login">
-    <img src="../assets/icon-above-font.png" alt="logo Groupomania" class="w-25 h-25">
+  <form  class="container d-flex justify-content-center align-items-center card card-login w-md-100">
+    <img src="../assets/icon-above-font.png" alt="logo Groupomania" class="image w-50 h-25">
     <!-- Titre Connexion -->
     <h1 class="card-title" v-if="mode == 'login' ">Connexion </h1>
     <!-- Titre Inscription -->
@@ -39,7 +39,7 @@
       Vérifiez l'adresse mail ou le mot de passe !
     </div>
 
-    <button @click.prevent="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-25" v-if="mode == 'login'">Se Connecter</button>
+    <button @click.prevent="login()" :disabled="!email.length || !password.length" class="btn button-submit mb-3 w-50" v-if="mode == 'login'">Se Connecter</button>
     <button @click.prevent="createAccount()" :disabled="!email.length || !prenom.length || !nom.length || !password.length" class="btn button-submit mb-3 w-25" v-else>S'incrire</button>
 
   </form>
@@ -126,7 +126,20 @@ export default {
 
 .card-login{
   border-radius: 10px;
-  width: 45%;
+  /* width: 45%; */
 }
+
+@media (min-width: 768px) {
+  .card-login{
+    width: 50%;
+  }
+
+  .image{
+    width: 25%!important;
+  }
+
+ }
+
+
 
 </style>

@@ -5,7 +5,7 @@
             <div class="d-flex flex-row justify-content-between">
                 <h4 class="card-title">{{ thread.User.firstName }} {{ thread.User.lastName }}</h4>
                 <div v-if="thread.User.id == userId || role == 0" class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn color-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn color-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="bouton menu deroulant modifer ou supprimer">
                     
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -104,7 +104,8 @@ export default {
 
 .threads{
     margin-top: 5%;
-    margin-bottom: 30px;
+    margin-bottom: 30px; 
+     margin-top: 30px;
 }
 
 .uniqueThread{
@@ -153,5 +154,12 @@ export default {
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
     font-size: 20px;
 }
+
+@media (min-width: 768px) {
+  .threads{
+    width: 70%!important;
+  }
+
+ }
 
 </style>

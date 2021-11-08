@@ -63,7 +63,6 @@ export default {
 <style scoped>
 
 .createThread{
-    max-width: 30%;
     margin-right: auto;
     margin-left: auto;
 }
@@ -81,5 +80,12 @@ export default {
 .color-primary:hover{
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;    
 }
+
+@media (min-width: 768px) {
+  .createThread{
+    width: 40%!important;
+  }
+
+ }
 
 </style>

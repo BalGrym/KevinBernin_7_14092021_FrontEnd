@@ -35,7 +35,6 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: white ;
 }
 .image-header{
@@ -56,5 +55,12 @@ export default {
 .button-color:hover{
     box-shadow: 0 0 0 0.25rem rgb(255 215 215 / 100%)!important;
 }
+@media (min-width: 576px) {
+  .header{
+      justify-content: center;
+      width: 100%!important;
+  }
+
+ }
 
 </style>
